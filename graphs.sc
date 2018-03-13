@@ -1,14 +1,4 @@
-/**IFT43GraphFrameStudent > graphs.sc
-2017=04-02
-Ok, after myriad combinations of build.sbt plus imports and
-( also tried external download of the graphframe jar, that didn't work~~)
-So, I put the graphframes dependency right in the build.sbt file
 
-***Does seem like though tha placing the graphframe imports
-right inside the object
-(right where I used the GraphFrame, instead of outside the object
-graphframe.sc  is crucial
-*/
 package main.scala.apps
 import java.util.Date
 import org.apache.log4j.{Level, Logger}
@@ -73,9 +63,12 @@ val f = GraphFrame(v, e)                          //> f  : org.graphframes.Graph
 //val f:GraphFrame = GraphFrame(v:DataFrame, e:DataFrame)
 
 // Query: Get in-degree of each vertex.
-f.inDegrees.show()                                //> [Stage 0:>                                                          (0 + 0
-                                                  //| ) / 5]                                                                    
-                                                  //|             +---+--------+
+f.inDegrees.show()                                //> 
+[Stage 0:>                                                          (0 + 0
+                                                  //| ) / 5]
+                                                                    
+                                                  //|             
++---+--------+
                                                   //| | id|inDegree|
                                                   //| +---+--------+
                                                   //| |  c|       3|
@@ -88,18 +81,30 @@ f.edges.filter("relationship = 'follow'").count() //> res0: Long = 4
 
 // Run PageRank algorithm, and show results.
 val results = f.pageRank.resetProbability(0.001).maxIter(10).run()
-                                                  //> [Stage 19:=>                                                      (5 + 0) 
-                                                  //| / 200][Stage 17:============> (181 + 8) / 200][Stage 19:>               (5
-                                                  //|  + 0) / 200][Stage 17:=============>(198 + 2) / 200][Stage 19:===>        
-                                                  //|    (43 + 8) / 200][Stage 17:=============>(199 + 1) / 200][Stage 19:======
-                                                  //| =>      (105 + 7) / 200][Stage 19:========================================
-                                                  //| ======>       (174 + 8) / 200][Stage 20:>                                 
-                                                  //|                         (0 + 5) / 5][Stage 20:>                 (0 + 5) / 
-                                                  //| 5][Stage 21:>                 (0 + 3) / 5][Stage 20:>                 (0 +
-                                                  //|  5) / 5][Stage 21:==========>       (3 + 2) / 5][Stage 20:=======>        
-                                                  //|   (2 + 3) / 5][Stage 21:==========>       (3 + 2) / 5][Stage 21:==========
-                                                  //| ========================>                       (3 + 2) / 5][Stage 22:====
-                                                  //| ===================================>              (146 + 8) / 200][Stage 2
+                                                  //> 
+[Stage 19:=>                                                      (5 + 0) 
+                                                  //| / 200]
+[Stage 17:============> (181 + 8) / 200][Stage 19:>               (5
+                                                  //|  + 0) / 200]
+[Stage 17:=============>(198 + 2) / 200][Stage 19:===>        
+                                                  //|    (43 + 8) / 200]
+[Stage 17:=============>(199 + 1) / 200][Stage 19:======
+                                                  //| =>      (105 + 7) / 200]
+[Stage 19:========================================
+                                                  //| ======>       (174 + 8) / 200]
+[Stage 20:>                                 
+                                                  //|                         (0 + 5) / 5]
+[Stage 20:>                 (0 + 5) / 
+                                                  //| 5][Stage 21:>                 (0 + 3) / 5]
+[Stage 20:>                 (0 +
+                                                  //|  5) / 5][Stage 21:==========>       (3 + 2) / 5]
+[Stage 20:=======>        
+                                                  //|   (2 + 3) / 5][Stage 21:==========>       (3 + 2) / 5]
+[Stage 21:==========
+                                                  //| ========================>                       (3 + 2) / 5]
+[Stage 22:====
+                                                  //| ===================================>              (146 + 8) / 200]
+[Stage 2
                                                   //| 3:>                    
                                                   //| Output exceeds cutoff limit.
 results.vertices.select("id", "pagerank").show()  //> +---+--------------------+
@@ -111,6 +116,7 @@ results.vertices.select("id", "pagerank").show()  //> +---+--------------------+
                                                   //| |  c|0.025865399211088942|
                                                   //| |  e|               0.001|
                                                   //| +---+--------------------+
-                                                  //| -
+                                                  //| 
+-
 
 }
